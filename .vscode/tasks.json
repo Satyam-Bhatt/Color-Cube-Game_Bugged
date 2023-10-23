@@ -1,0 +1,707 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "CubeMoveGame Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame Win64 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame Win64 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame Win64 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame IOS Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame IOS DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame IOS Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame IOS Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Test",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGame IOS Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGame IOS Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGame",
+				"IOS",
+				"Shipping",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGameEditor Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGameEditor Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"CubeMoveGameEditor Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "CubeMoveGameEditor Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"CubeMoveGameEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\CubeMoveGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		}
+	]
+}

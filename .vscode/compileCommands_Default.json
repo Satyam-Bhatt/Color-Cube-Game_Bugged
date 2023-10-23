@@ -1,0 +1,58 @@
+[
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\CubeMoveGame.Build.cs",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\CubeMoveGame.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\CubeMoveGame.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\CubeMoveGameGameModeBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\CubeMoveGameGameModeBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\MovementClass.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\Source\\CubeMoveGame\\MovementClass.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	}
+]
