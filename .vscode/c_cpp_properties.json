@@ -7,7 +7,7 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "msvc-x64",
             "configurationProvider": "epic.ue",
-            "compileCommands": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_CubeMoveGame.json"
+            "compileCommands": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame.json"
         },
         {
             "name": "Win32",
@@ -16,7 +16,7 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "msvc-x64",
             "configurationProvider": "epic.ue",
-            "compileCommands": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Cube Game\\CubeMoveGame\\.vscode\\compileCommands_Default.json"
+            "compileCommands": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_Default.json"
         }
     ],
     "version": 4

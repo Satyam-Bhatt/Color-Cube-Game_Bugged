@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
+#include "Components/TimelineComponent.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -20,6 +21,12 @@ AMovementClass::AMovementClass()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
+}
+
+void AMovementClass::TimelineProgress(float Value)
+{
+	FVector NewLocation = FMath::Lerp(StartLoc, EndLoc, Value);
+	SetActorLocation(NewLocation);
 }
 
 // Called to bind functionality to input
@@ -38,6 +45,18 @@ void AMovementClass::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if(CurveFloat)
+	{
+		FOnTimelineFloat TimelineProgress;
+		TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
+		CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);
+		CurveTimeline.SetLooping(true);
+
+		StartLoc = EndLoc = GetActorLocation();
+		EndLoc.Z += ZOffset;
+
+		CurveTimeline.PlayFromStart();
+	}
 }
 
 void AMovementClass::UpMovement()
@@ -55,6 +74,7 @@ void AMovementClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CurveTimeline.TickTimeline(DeltaTime);
 }
 
 
