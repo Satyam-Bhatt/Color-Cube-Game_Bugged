@@ -45,28 +45,44 @@ void AMovementClass::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// if(CurveFloat)
+	// {
+	// 	FOnTimelineFloat TimelineProgress;
+	// 	TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
+	// 	CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);
+	// 	CurveTimeline.SetLooping(true);
+
+	// 	StartLoc = EndLoc = GetActorLocation();
+	// 	EndLoc.Z += ZOffset;
+
+	// 	CurveTimeline.PlayFromStart();
+	// }
+}
+
+void AMovementClass::UpMovement()
+{
 	if(CurveFloat)
 	{
 		FOnTimelineFloat TimelineProgress;
 		TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
 		CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);
-		CurveTimeline.SetLooping(true);
+		//CurveTimeline.SetLooping(true);
 
 		StartLoc = EndLoc = GetActorLocation();
 		EndLoc.Z += ZOffset;
 
 		CurveTimeline.PlayFromStart();
 	}
-}
 
-void AMovementClass::UpMovement()
-{
-	FVector ActorLocation = GetActorLocation();
-	FVector ActorScale = GetActorScale();
-	float MoveLocation = ActorLocation.X + 50;
-	FVector MovePlace = FVector(MoveLocation, ActorLocation.Y, ActorLocation.Z);
-	FVector LerpValues = FMath::Lerp(GetActorLocation(), MovePlace, 0.5);
-	SetActorLocation(LerpValues);
+
+
+
+	// FVector ActorLocation = GetActorLocation();
+	// FVector ActorScale = GetActorScale();
+	// float MoveLocation = ActorLocation.X + 50;
+	// FVector MovePlace = FVector(MoveLocation, ActorLocation.Y, ActorLocation.Z);
+	// FVector LerpValues = FMath::Lerp(GetActorLocation(), MovePlace, 0.5);
+	// SetActorLocation(LerpValues);
 }
 
 // Called every frame
