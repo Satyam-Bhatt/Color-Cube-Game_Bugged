@@ -37,7 +37,11 @@ protected:
 	FVector EndLoc;
 
 	UPROPERTY(EditAnywhere, Category = "Timeline")
-	float XOffset;
+	float XOffset = 100.f;
+
+	UPROPERTY(EditAnywhere, Category = "Timeline")
+	float YOffset = 100.f;
+
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -53,7 +57,15 @@ private:
 
 	void LookUp(float AxisValue);
 
+	void TimelineFunction();
+
 	void UpMovement();
+
+	void RightMovement();
+
+	void LeftMovement();
+
+	void DownMovement();
 
 public:	
 	// Called every frame

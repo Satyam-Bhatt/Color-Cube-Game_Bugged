@@ -38,6 +38,9 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 
 	PlayerInputComponent->BindAction(TEXT("Up"), IE_Pressed, this, &AMovementClass::UpMovement);
+	PlayerInputComponent->BindAction(TEXT("Right"), IE_Pressed, this, &AMovementClass::RightMovement);
+	PlayerInputComponent->BindAction(TEXT("Left"), IE_Pressed, this, &AMovementClass::LeftMovement);
+	PlayerInputComponent->BindAction(TEXT("Down"), IE_Pressed, this, &AMovementClass::DownMovement);
 }
 
 // Called when the game starts or when spawned
@@ -53,21 +56,73 @@ void AMovementClass::UpMovement()
 {
 	if(CurveFloat)
 	{
-
 		if(GetActorLocation() == MoveLocation)
 		{
-			FOnTimelineFloat TimelineProgress;
-			TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
-			CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);
-
 			StartLoc = EndLoc = GetActorLocation();
 			EndLoc.X += XOffset;
 
 			MoveLocation = GetActorLocation() + FVector(XOffset,0,0); 
 
-			CurveTimeline.PlayFromStart();
+			TimelineFunction();
 		}
 	}
+}
+
+void AMovementClass::RightMovement()
+{
+	if(CurveFloat)
+	{
+		if(GetActorLocation() == MoveLocation)
+		{
+			StartLoc = EndLoc = GetActorLocation();
+			EndLoc.Y += YOffset;
+
+			TimelineFunction();
+
+			MoveLocation = GetActorLocation() + FVector(0, YOffset, 0);
+		}
+	}
+}
+
+void AMovementClass::LeftMovement()
+{
+	if(CurveFloat)
+	{
+		if(GetActorLocation() == MoveLocation)
+		{
+			StartLoc = EndLoc = GetActorLocation();
+			EndLoc.Y -= YOffset;
+
+			TimelineFunction();
+
+			MoveLocation = GetActorLocation() - FVector(0, YOffset, 0);
+		}
+	}
+}
+
+void AMovementClass::DownMovement()
+{
+	if(CurveFloat)
+	{
+		if(GetActorLocation() == MoveLocation)
+		{
+			StartLoc = EndLoc = GetActorLocation();
+			EndLoc.X -= XOffset;
+
+			TimelineFunction();
+
+			MoveLocation = GetActorLocation() - FVector(XOffset,0,0); 			
+		}
+	}	
+}
+
+void AMovementClass::TimelineFunction()
+{
+	FOnTimelineFloat TimelineProgress;
+	TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
+	CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);	
+
+	CurveTimeline.PlayFromStart();
 }
 
 // Called every frame
