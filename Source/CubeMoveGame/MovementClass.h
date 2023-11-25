@@ -37,7 +37,7 @@ protected:
 	FVector EndLoc;
 
 	UPROPERTY(EditAnywhere, Category = "Timeline")
-	float ZOffset;
+	float XOffset;
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -48,6 +48,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
+
+	FVector MoveLocation;
 
 	void LookUp(float AxisValue);
 
