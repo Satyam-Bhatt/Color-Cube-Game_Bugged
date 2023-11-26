@@ -6,6 +6,8 @@
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "Components/TimelineComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Math/Vector.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -41,6 +43,8 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction(TEXT("Right"), IE_Pressed, this, &AMovementClass::RightMovement);
 	PlayerInputComponent->BindAction(TEXT("Left"), IE_Pressed, this, &AMovementClass::LeftMovement);
 	PlayerInputComponent->BindAction(TEXT("Down"), IE_Pressed, this, &AMovementClass::DownMovement);
+
+	PlayerInputComponent->BindAction(TEXT("RotateUp"), IE_Pressed, this, &AMovementClass::RotateUp);
 }
 
 // Called when the game starts or when spawned
@@ -114,6 +118,18 @@ void AMovementClass::DownMovement()
 			MoveLocation = GetActorLocation() - FVector(XOffset,0,0); 			
 		}
 	}	
+}
+
+void AMovementClass::RotateUp()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Up hua Na"));
+
+	FVector Anchor = GetActorLocation() + FVector(0.5, 0 , -0.5);
+	FVector Axis = FVector::CrossProduct(FVector::UpVector, FVector::RightVector);
+
+	FVector RotationOfAxis = UKismetMathLibrary::RotateAngleAxis(Anchor, 90, Axis);
+
+	SetActorRotation(RotationOfAxis.Rotation(), ETeleportType::None);
 }
 
 void AMovementClass::TimelineFunction()
