@@ -69,6 +69,15 @@ private:
 
 	void RotateUp();
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float PitchValue = 0.f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float YawValue = 0.f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float RollValue = 0.f;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

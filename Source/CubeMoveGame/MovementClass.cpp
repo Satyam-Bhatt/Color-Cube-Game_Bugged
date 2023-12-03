@@ -8,6 +8,7 @@
 #include "Components/TimelineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Math/Vector.h"
+#include "GameFramework/RotatingMovementComponent.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -124,12 +125,8 @@ void AMovementClass::RotateUp()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Up hua Na"));
 
-	FVector Anchor = GetActorLocation() + FVector(0.5, 0 , -0.5);
-	FVector Axis = FVector::CrossProduct(FVector::UpVector, FVector::RightVector);
 
-	FVector RotationOfAxis = UKismetMathLibrary::RotateAngleAxis(Anchor, 90, Axis);
 
-	SetActorRotation(RotationOfAxis.Rotation(), ETeleportType::None);
 }
 
 void AMovementClass::TimelineFunction()
@@ -147,6 +144,10 @@ void AMovementClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	CurveTimeline.TickTimeline(DeltaTime);
+
+	FQuat QuatRotaion = FQuat(FRotator(PitchValue, YawValue, RollValue));
+
+	//AddActorLocalRotation(QuatRotaion, false, 0, ETeleportType::None);
 }
 
 
