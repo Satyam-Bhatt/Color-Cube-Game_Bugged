@@ -24,6 +24,7 @@ AMovementClass::AMovementClass()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
+	RotationDoer = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("Rotatiing Component"));
 }
 
 void AMovementClass::TimelineProgress(float Value)
@@ -148,6 +149,10 @@ void AMovementClass::Tick(float DeltaTime)
 	FQuat QuatRotaion = FQuat(FRotator(PitchValue, YawValue, RollValue));
 
 	//AddActorLocalRotation(QuatRotaion, false, 0, ETeleportType::None);
+
+	RotationDoer->PivotTranslation = FVector(0, 50, -50);
+	RotationDoer->RotationRate.Pitch = 90.f;
+	RotationDoer->RotationRate.Yaw = 0.f;
 }
 
 

@@ -53,6 +53,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere)
+	class URotatingMovementComponent* RotationDoer;
+
 	FVector MoveLocation;
 
 	void LookUp(float AxisValue);
