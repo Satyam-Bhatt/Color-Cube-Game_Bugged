@@ -7,6 +7,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "Components/TimelineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Math/Vector.h"
 #include "GameFramework/RotatingMovementComponent.h"
 
@@ -126,7 +127,11 @@ void AMovementClass::RotateUp()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Up hua Na"));
 
+	RotationDoer->PivotTranslation = FVector(0, 0, 0);
+	RotationDoer->RotationRate.Pitch = 90.f;
+	RotationDoer->RotationRate.Yaw = 0.f;
 
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 1.0f, false, 1.0f);
 
 }
 
@@ -146,13 +151,15 @@ void AMovementClass::Tick(float DeltaTime)
 
 	CurveTimeline.TickTimeline(DeltaTime);
 
-	FQuat QuatRotaion = FQuat(FRotator(PitchValue, YawValue, RollValue));
+}
 
-	//AddActorLocalRotation(QuatRotaion, false, 0, ETeleportType::None);
-
-	RotationDoer->PivotTranslation = FVector(0, 50, -50);
-	RotationDoer->RotationRate.Pitch = 90.f;
+void AMovementClass::TimerFunction()
+{	
+	RotationDoer->PivotTranslation = FVector(0, 0, 0);
+	RotationDoer->RotationRate.Pitch = 0.f;
 	RotationDoer->RotationRate.Yaw = 0.f;
+
+	UE_LOG(LogTemp, Warning, TEXT("Timer Called"));
 }
 
 

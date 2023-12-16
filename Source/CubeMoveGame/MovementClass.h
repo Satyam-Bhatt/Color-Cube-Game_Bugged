@@ -81,6 +81,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RollValue = 0.f;
 
+	void TimerFunction();
+	FTimerHandle TimerHandle;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
