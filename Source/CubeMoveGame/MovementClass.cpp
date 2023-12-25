@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Math/Vector.h"
 #include "GameFramework/RotatingMovementComponent.h"
+#include "Components/SceneComponent.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -48,15 +49,13 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction(TEXT("Down"), IE_Pressed, this, &AMovementClass::DownMovement);
 
 	PlayerInputComponent->BindAction(TEXT("RotateUp"), IE_Pressed, this, &AMovementClass::RotateUp);
+	PlayerInputComponent->BindAction(TEXT("RotateRight"), IE_Pressed, this, &AMovementClass::RotateRight);
 }
 
 // Called when the game starts or when spawned
 void AMovementClass::BeginPlay()
 {
 	Super::BeginPlay();
-
-	MoveLocation = GetActorLocation();
-
 }
 
 void AMovementClass::UpMovement()
@@ -125,14 +124,18 @@ void AMovementClass::DownMovement()
 
 void AMovementClass::RotateUp()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Up hua Na"));
 
-	RotationDoer->PivotTranslation = FVector(0, 0, 0);
-	RotationDoer->RotationRate.Pitch = 90.f;
-	RotationDoer->RotationRate.Yaw = 0.f;
+}
 
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 1.0f, false, 1.0f);
+void AMovementClass::RotateRight()
+{
+	HorizontalAxis = 1.f;
+	VerticalAxis = 0.f;
 
+	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
+	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, -90, AxisOfRotation(HorizontalAxis, VerticalAxis));
+
+	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
 }
 
 void AMovementClass::TimelineFunction()
@@ -151,15 +154,25 @@ void AMovementClass::Tick(float DeltaTime)
 
 	CurveTimeline.TickTimeline(DeltaTime);
 
+	//RotateAngleAxis in KismetMathLibrary = RotateVectorAroundAxis
+
 }
 
 void AMovementClass::TimerFunction()
 {	
-	RotationDoer->PivotTranslation = FVector(0, 0, 0);
-	RotationDoer->RotationRate.Pitch = 0.f;
-	RotationDoer->RotationRate.Yaw = 0.f;
 
-	UE_LOG(LogTemp, Warning, TEXT("Timer Called"));
+}
+
+FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
+{
+	FVector PivotPoint = GetActorLocation() + FVector(VAxis * 50, HAxis * 50, -50);
+	return PivotPoint;
+}
+
+FVector AMovementClass::AxisOfRotation(float HAxis, float VAxis)
+{
+	FVector AxisToRotate = FVector(HAxis * 1, VAxis * 1, 0);
+	return AxisToRotate;
 }
 
 

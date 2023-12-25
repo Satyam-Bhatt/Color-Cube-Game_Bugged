@@ -53,7 +53,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class URotatingMovementComponent* RotationDoer;
 
 	FVector MoveLocation;
@@ -72,6 +72,8 @@ private:
 
 	void RotateUp();
 
+	void RotateRight();
+
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float PitchValue = 0.f;
 
@@ -81,8 +83,19 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RollValue = 0.f;
 
-	void TimerFunction();
 	FTimerHandle TimerHandle;
+	
+	float HorizontalAxis = 0.f;
+	float VerticalAxis = 0.f;
+
+	FVector PivotLocation(float HAxis, float VAxis);
+
+	FVector AxisOfRotation(float HAxis, float VAxis);
+	
+	void TimerFunction();
+
+
+	
 
 public:	
 	// Called every frame
