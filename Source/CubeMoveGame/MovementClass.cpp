@@ -56,6 +56,9 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AMovementClass::BeginPlay()
 {
 	Super::BeginPlay();
+
+	LastActorLocation = GetActorLocation();
+	Step = 30.f;
 }
 
 void AMovementClass::UpMovement()
@@ -131,11 +134,15 @@ void AMovementClass::RotateRight()
 {
 	HorizontalAxis = 1.f;
 	VerticalAxis = 0.f;
+	LastActorLocation = GetActorLocation();
 
-	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
-	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, -90, AxisOfRotation(HorizontalAxis, VerticalAxis));
+	if(GetWorldTimerManager().IsTimerActive(TimerHandle)){
+		return;
+	}
+	else{
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::MoveCube, 0.01, true);
+	}
 
-	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
 }
 
 void AMovementClass::TimelineFunction()
@@ -154,7 +161,7 @@ void AMovementClass::Tick(float DeltaTime)
 
 	CurveTimeline.TickTimeline(DeltaTime);
 
-	//RotateAngleAxis in KismetMathLibrary = RotateVectorAroundAxis
+	//FVector WorldSpace = UKismetMathLibrary::InverseTransformLocation(GetTransform(), GetActorLocation());
 
 }
 
@@ -165,7 +172,8 @@ void AMovementClass::TimerFunction()
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
 {
-	FVector PivotPoint = GetActorLocation() + FVector(VAxis * 50, HAxis * 50, -50);
+	FVector PivotPoint = LastActorLocation + FVector(VAxis * 50, HAxis * 50, -50);
+	//FVector PivotLocationNew = FVector(PivotPoint.X, PivotPoint.Y, -50);
 	return PivotPoint;
 }
 
@@ -173,6 +181,27 @@ FVector AMovementClass::AxisOfRotation(float HAxis, float VAxis)
 {
 	FVector AxisToRotate = FVector(HAxis * 1, VAxis * 1, 0);
 	return AxisToRotate;
+}
+
+void AMovementClass::MoveCube()
+{
+	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
+	//FVector NewVector = FVector(InVector.X, InVector.Y, -50);
+	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, -90/30, AxisOfRotation(HorizontalAxis, VerticalAxis));
+	UE_LOG(LogTemp, Warning, TEXT("Vector location nnnn: %s"), *RotatedVector.ToString());
+
+	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
+	UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *GetActorLocation().ToString());
+
+	if(Counter >= 30)
+	{
+		GetWorldTimerManager().ClearTimer(TimerHandle);
+		Counter = 1.f;
+	}
+	else{
+		Counter = Counter + 1;
+	}
+
 }
 
 

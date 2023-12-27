@@ -87,6 +87,10 @@ private:
 	
 	float HorizontalAxis = 0.f;
 	float VerticalAxis = 0.f;
+	float Step = 0.f;
+	float Counter = 1.f;
+
+	FVector LastActorLocation;
 
 	FVector PivotLocation(float HAxis, float VAxis);
 
@@ -94,8 +98,8 @@ private:
 	
 	void TimerFunction();
 
+	void MoveCube();
 
-	
 
 public:	
 	// Called every frame
