@@ -20,11 +20,11 @@ AMovementClass::AMovementClass()
 
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube Static Mesh"));
 
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	SpringArm->SetupAttachment(CubeMesh);
+	//SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+	//SpringArm->SetupAttachment(CubeMesh);
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(SpringArm);
+	Camera->SetupAttachment(CubeMesh);
 
 	RotationDoer = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("Rotatiing Component"));
 }
@@ -40,8 +40,8 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 
 	PlayerInputComponent->BindAction(TEXT("Up"), IE_Pressed, this, &AMovementClass::UpMovement);
 	PlayerInputComponent->BindAction(TEXT("Right"), IE_Pressed, this, &AMovementClass::RightMovement);
@@ -127,13 +127,9 @@ void AMovementClass::DownMovement()
 
 void AMovementClass::RotateUp()
 {
-
-}
-
-void AMovementClass::RotateRight()
-{
-	HorizontalAxis = 1.f;
-	VerticalAxis = 0.f;
+	HorizontalAxis = 0.f;
+	VerticalAxis = 1.f;
+	Angle = 90.f;
 	LastActorLocation = GetActorLocation();
 
 	if(GetWorldTimerManager().IsTimerActive(TimerHandle)){
@@ -142,7 +138,21 @@ void AMovementClass::RotateRight()
 	else{
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::MoveCube, 0.01, true);
 	}
+}
 
+void AMovementClass::RotateRight()
+{
+	HorizontalAxis = 1.f;
+	VerticalAxis = 0.f;
+	Angle = -90.f;
+	LastActorLocation = GetActorLocation();
+
+	if(GetWorldTimerManager().IsTimerActive(TimerHandle)){
+		return;
+	}
+	else{
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::MoveCube, 0.01, true);
+	}
 }
 
 void AMovementClass::TimelineFunction()
@@ -173,7 +183,6 @@ void AMovementClass::TimerFunction()
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
 {
 	FVector PivotPoint = LastActorLocation + FVector(VAxis * 50, HAxis * 50, -50);
-	//FVector PivotLocationNew = FVector(PivotPoint.X, PivotPoint.Y, -50);
 	return PivotPoint;
 }
 
@@ -185,17 +194,24 @@ FVector AMovementClass::AxisOfRotation(float HAxis, float VAxis)
 
 void AMovementClass::MoveCube()
 {
+	
 	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
-	//FVector NewVector = FVector(InVector.X, InVector.Y, -50);
-	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, -90/30, AxisOfRotation(HorizontalAxis, VerticalAxis));
-	UE_LOG(LogTemp, Warning, TEXT("Vector location nnnn: %s"), *RotatedVector.ToString());
+	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, Angle/Step, AxisOfRotation(HorizontalAxis, VerticalAxis));
+	
+	FRotator CubeRotation = UKismetMathLibrary::RotatorFromAxisAndAngle(AxisOfRotation(HorizontalAxis,VerticalAxis), Angle/Step);
+	
+	FRotator CombinedRotationNormal = GetActorRotation() + CubeRotation;
+	UE_LOG(LogTemp, Warning, TEXT("Normal Addition: %s"), *CombinedRotationNormal.ToString());
+	FRotator CombinedRotation = UKismetMathLibrary::ComposeRotators(GetActorRotation(), CubeRotation);
+	UE_LOG(LogTemp, Error, TEXT("Compose Rotators: %s"), *CombinedRotation.ToString());
 
 	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
-	UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *GetActorLocation().ToString());
+	SetActorRotation(CombinedRotation);
 
-	if(Counter >= 30)
+	if(Counter >= Step)
 	{
 		GetWorldTimerManager().ClearTimer(TimerHandle);
+		MoveLocation = GetActorLocation();
 		Counter = 1.f;
 	}
 	else{
@@ -203,5 +219,3 @@ void AMovementClass::MoveCube()
 	}
 
 }
-
-

@@ -47,8 +47,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CubeMesh;
 
-	UPROPERTY(EditAnywhere)
-	class USpringArmComponent* SpringArm;
+	//UPROPERTY(EditAnywhere)
+	//class USpringArmComponent* SpringArm;
 
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
@@ -87,6 +87,7 @@ private:
 	
 	float HorizontalAxis = 0.f;
 	float VerticalAxis = 0.f;
+	float Angle = 0.f;
 	float Step = 0.f;
 	float Counter = 1.f;
 
