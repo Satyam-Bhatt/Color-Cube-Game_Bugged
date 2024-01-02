@@ -47,8 +47,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CubeMesh;
 
-	//UPROPERTY(EditAnywhere)
-	//class USpringArmComponent* SpringArm;
+	UPROPERTY(EditAnywhere)
+	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
@@ -83,7 +83,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RollValue = 0.f;
 
-	FTimerHandle TimerHandle;
+	FTimerHandle TimeHandleBar;
 	
 	float HorizontalAxis = 0.f;
 	float VerticalAxis = 0.f;
