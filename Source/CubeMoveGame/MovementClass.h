@@ -101,6 +101,12 @@ private:
 
 	void MoveCube();
 
+//Second Move Cube Try
+	FTimerHandle TimerHandle;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	bool SecondMethod = false;
+
+
 
 public:	
 	// Called every frame

@@ -127,30 +127,52 @@ void AMovementClass::DownMovement()
 
 void AMovementClass::RotateUp()
 {
-	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)){
-		return;
+	if(SecondMethod)
+	{
+		FVector WorldLocaion = GetActorLocation() + FVector(50.f, 0, -50.f);
+		RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), WorldLocaion);
+		RotationDoer->RotationRate = FRotator(-90.f,0.f,0.f);
+
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, true, 0.99);
 	}
-	else{
-		HorizontalAxis = 0.f;
-		VerticalAxis = 1.f;
-		Angle = 90.f;
-		LastActorLocation = GetActorLocation();
-		GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+	else
+	{
+		if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)){
+			return;
+		}
+		else{
+			HorizontalAxis = 0.f;
+			VerticalAxis = 1.f;
+			Angle = 90.f;
+			LastActorLocation = GetActorLocation();
+			GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+		}
 	}
+
+
 }
 
 void AMovementClass::RotateRight()
 {
-	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)){
-		return;
-	}
-	else{ 
-		HorizontalAxis = 1.f;
-		VerticalAxis = 0.f;
-		Angle = -90.f;
-		LastActorLocation = GetActorLocation();
+	if(SecondMethod){
+		FVector WorldLocation = GetActorLocation() + FVector(0,50.f, -50.f);
+		RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetTransform(), WorldLocation);
+		RotationDoer->RotationRate = FRotator(0.f, 0.f, 90.f);
 
-		GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, true, 0.99);
+	}
+	else{
+		if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)){
+			return;
+		}
+		else{ 
+			HorizontalAxis = 1.f;
+			VerticalAxis = 0.f;
+			Angle = -90.f;
+			LastActorLocation = GetActorLocation();
+
+			GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+		}
 	}
 }
 
@@ -169,13 +191,24 @@ void AMovementClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	CurveTimeline.TickTimeline(DeltaTime);
-	//FVector WorldSpace = UKismetMathLibrary::InverseTransformLocation(GetTransform(), GetActorLocation());
-
 }
 
 void AMovementClass::TimerFunction()
 {	
+	int64 RollValueNew = AActor::GetTransform().Rotator().Roll;
+	int64 PitchValueNew = AActor::GetTransform().Rotator().Pitch;
+	int64 YawValueNew = AActor::GetTransform().Rotator().Yaw;
+	
+	UE_LOG(LogTemp, Warning, TEXT("Roll Value: %i"), RollValueNew);
+	UE_LOG(LogTemp, Warning, TEXT("Pitch Value %i"), PitchValueNew);
+	UE_LOG(LogTemp, Warning, TEXT("Yaw Value %i"), YawValueNew);
 
+	FRotator NewRotaion = FRotator(PitchValueNew, YawValueNew, RollValueNew);
+	SetActorRotation(NewRotaion, ETeleportType::None);
+
+	RotationDoer->PivotTranslation = GetActorLocation();
+	RotationDoer->RotationRate = FRotator::ZeroRotator;
+	GetWorldTimerManager().ClearTimer(TimerHandle);
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
@@ -195,11 +228,15 @@ void AMovementClass::MoveCube()
 	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
 	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, Angle/Step, AxisOfRotation(HorizontalAxis, VerticalAxis));
 	
-	FRotator CubeRotation = UKismetMathLibrary::RotatorFromAxisAndAngle(AxisOfRotation(HorizontalAxis,VerticalAxis), Angle/Step);
-	FRotator CombinedRotation = UKismetMathLibrary::ComposeRotators(GetActorRotation(), CubeRotation);
+	//FRotator CubeRotation = UKismetMathLibrary::RotatorFromAxisAndAngle(AxisOfRotation(HorizontalAxis,VerticalAxis), Angle/Step);
+	//FRotator CombinedRotation = UKismetMathLibrary::ComposeRotators(GetActorRotation(), CubeRotation);
+	//SetActorRotation(CombinedRotation);
+
+	FRotator CubeRotaion_World = FRotator(VerticalAxis * -Angle/Step ,0, HorizontalAxis * -Angle/Step);
+	AddActorWorldRotation(CubeRotaion_World);
 
 	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
-	SetActorRotation(CombinedRotation);
+	
 
 	if(Counter >= Step)
 	{
