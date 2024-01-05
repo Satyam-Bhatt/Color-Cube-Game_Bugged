@@ -221,7 +221,29 @@ void AMovementClass::RotateLeft()
 
 void AMovementClass::RotateDown()
 {
+	if(FirstMethod)
+	{
+		if(GetWorldTimerManager().IsTimerActive(TimerHandle)) return;
 
+		else{
+			FVector PivotLocation_World = GetActorLocation() + FVector(-50.f, 0, -50.f);
+			FVector PivotLocation_Local = UKismetMathLibrary::InverseTransformLocation(GetTransform(), PivotLocation_World);
+
+			RotationDoer->PivotTranslation = PivotLocation_Local;
+			RotationDoer->RotationRate = FRotator(90.f, 0.f, 0.f);
+
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, false, 0.99);
+		}
+	}
+	else
+	{
+		HorizontalAxis = 0.f;
+		VerticalAxis = -1.f;
+		Angle = 90.f;
+		LastActorLocation = GetActorLocation();
+
+		GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+	}
 }
 
 void AMovementClass::TimelineFunction()
