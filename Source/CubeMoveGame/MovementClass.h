@@ -58,33 +58,19 @@ private:
 
 	FVector MoveLocation;
 
-	void LookUp(float AxisValue);
-
 	void TimelineFunction();
 
+	void LookUp(float AxisValue);
 	void UpMovement();
-
 	void RightMovement();
-
 	void LeftMovement();
-
 	void DownMovement();
-
 	void RotateUp();
-
 	void RotateRight();
-
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float PitchValue = 0.f;
-
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float YawValue = 0.f;
-
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float RollValue = 0.f;
+	void RotateLeft();
+	void RotateDown();
 
 	FTimerHandle TimeHandleBar;
-	
 	float HorizontalAxis = 0.f;
 	float VerticalAxis = 0.f;
 	float Angle = 0.f;
@@ -104,7 +90,7 @@ private:
 //Second Move Cube Try
 	FTimerHandle TimerHandle;
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	bool SecondMethod = false;
+	bool FirstMethod = false;
 
 
 

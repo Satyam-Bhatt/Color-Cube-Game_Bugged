@@ -50,6 +50,8 @@ void AMovementClass::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction(TEXT("RotateUp"), IE_Pressed, this, &AMovementClass::RotateUp);
 	PlayerInputComponent->BindAction(TEXT("RotateRight"), IE_Pressed, this, &AMovementClass::RotateRight);
+	PlayerInputComponent->BindAction(TEXT("RotateLeft"), IE_Pressed, this, &AMovementClass::RotateLeft);
+	PlayerInputComponent->BindAction(TEXT("RotateDown"), IE_Pressed, this, &AMovementClass::RotateDown);
 }
 
 // Called when the game starts or when spawned
@@ -127,13 +129,17 @@ void AMovementClass::DownMovement()
 
 void AMovementClass::RotateUp()
 {
-	if(SecondMethod)
+	if(FirstMethod)
 	{
-		FVector WorldLocaion = GetActorLocation() + FVector(50.f, 0, -50.f);
-		RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), WorldLocaion);
-		RotationDoer->RotationRate = FRotator(-90.f,0.f,0.f);
+		if(GetWorldTimerManager().IsTimerActive(TimerHandle)) return;
 
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, true, 0.99);
+		else{
+			FVector WorldLocaion = GetActorLocation() + FVector(50.f, 0, -50.f);
+			RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), WorldLocaion);
+			RotationDoer->RotationRate = FRotator(-90.f,0.f,0.f);
+
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, false, 0.99);
+		}
 	}
 	else
 	{
@@ -148,18 +154,20 @@ void AMovementClass::RotateUp()
 			GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
 		}
 	}
-
-
 }
 
 void AMovementClass::RotateRight()
 {
-	if(SecondMethod){
-		FVector WorldLocation = GetActorLocation() + FVector(0,50.f, -50.f);
-		RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetTransform(), WorldLocation);
-		RotationDoer->RotationRate = FRotator(0.f, 0.f, 90.f);
+	if(FirstMethod){
+		if(GetWorldTimerManager().IsTimerActive(TimerHandle)) return;
 
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, true, 0.99);
+		else{
+			FVector WorldLocation = GetActorLocation() + FVector(0,50.f, -50.f);
+			RotationDoer->PivotTranslation = UKismetMathLibrary::InverseTransformLocation(GetTransform(), WorldLocation);
+			RotationDoer->RotationRate = FRotator(0.f, 0.f, 90.f);
+
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, false, 0.99);
+		}
 	}
 	else{
 		if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)){
@@ -174,6 +182,46 @@ void AMovementClass::RotateRight()
 			GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
 		}
 	}
+}
+
+void AMovementClass::RotateLeft()
+{
+	if(FirstMethod)
+	{
+		if(GetWorldTimerManager().IsTimerActive(TimerHandle)) return;
+
+		else
+		{
+			FVector PivotLocation_World = GetActorLocation() + FVector(0.f, -50.f, -50.f);
+			FVector PivotLocation_Local = UKismetMathLibrary::InverseTransformLocation(GetTransform(), PivotLocation_World);
+
+			RotationDoer->PivotTranslation = PivotLocation_Local;
+			RotationDoer->RotationRate = FRotator(0.f, 0.f, -90.f);
+
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &AMovementClass::TimerFunction, 0.01, false, 0.99);
+		}
+	}
+	else
+	{
+		if(GetWorldTimerManager().IsTimerActive(TimeHandleBar))
+		{
+			return;
+		}
+		else
+		{
+			HorizontalAxis = -1.f; 
+			VerticalAxis = 0;
+			Angle = -90.f;
+			LastActorLocation = GetActorLocation();
+
+			GetWorldTimerManager().SetTimer(TimeHandleBar, this, &AMovementClass::MoveCube, 0.01, true);
+		}
+	}
+}
+
+void AMovementClass::RotateDown()
+{
+
 }
 
 void AMovementClass::TimelineFunction()
@@ -193,24 +241,6 @@ void AMovementClass::Tick(float DeltaTime)
 	CurveTimeline.TickTimeline(DeltaTime);
 }
 
-void AMovementClass::TimerFunction()
-{	
-	int64 RollValueNew = AActor::GetTransform().Rotator().Roll;
-	int64 PitchValueNew = AActor::GetTransform().Rotator().Pitch;
-	int64 YawValueNew = AActor::GetTransform().Rotator().Yaw;
-	
-	UE_LOG(LogTemp, Warning, TEXT("Roll Value: %i"), RollValueNew);
-	UE_LOG(LogTemp, Warning, TEXT("Pitch Value %i"), PitchValueNew);
-	UE_LOG(LogTemp, Warning, TEXT("Yaw Value %i"), YawValueNew);
-
-	FRotator NewRotaion = FRotator(PitchValueNew, YawValueNew, RollValueNew);
-	SetActorRotation(NewRotaion, ETeleportType::None);
-
-	RotationDoer->PivotTranslation = GetActorLocation();
-	RotationDoer->RotationRate = FRotator::ZeroRotator;
-	GetWorldTimerManager().ClearTimer(TimerHandle);
-}
-
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
 {
 	FVector PivotPoint = LastActorLocation + FVector(VAxis * 50, HAxis * 50, -50);
@@ -221,6 +251,24 @@ FVector AMovementClass::AxisOfRotation(float HAxis, float VAxis)
 {
 	FVector AxisToRotate = FVector(HAxis * 1, VAxis * 1, 0);
 	return AxisToRotate;
+}
+
+void AMovementClass::TimerFunction()
+{	
+	float RollValueNew = GetActorRotation().Roll/90;
+	float YawValueNew = GetActorRotation().Yaw/90;
+	float PitchValueNew = GetActorRotation().Pitch/90;
+	
+	int64 Roll_Whole = FMath::RoundToInt(RollValueNew) * 90;
+	int64 Yaw_Whole = FMath::RoundToInt(YawValueNew) * 90;
+	int64 Pitch_Whole = FMath::RoundToInt(PitchValueNew) * 90;
+
+	FRotator NewRotaion = FRotator(Pitch_Whole, Yaw_Whole, Roll_Whole);
+	SetActorRotation(NewRotaion, ETeleportType::None);
+
+	RotationDoer->PivotTranslation = GetActorLocation();
+	RotationDoer->RotationRate = FRotator::ZeroRotator;
+	GetWorldTimerManager().ClearTimer(TimerHandle);
 }
 
 void AMovementClass::MoveCube()
