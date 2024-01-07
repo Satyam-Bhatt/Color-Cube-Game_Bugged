@@ -53,12 +53,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class URotatingMovementComponent* RotationDoer;
-
 	FVector MoveLocation;
 
 	void TimelineFunction();
+
+#pragma region //KeyBindings
 
 	void LookUp(float AxisValue);
 	void UpMovement();
@@ -70,29 +69,24 @@ private:
 	void RotateLeft();
 	void RotateDown();
 
+#pragma endregion
+
 	FTimerHandle TimeHandleBar;
+	FVector LastActorLocation;
 	float HorizontalAxis = 0.f;
 	float VerticalAxis = 0.f;
 	float Angle = 0.f;
 	float Step = 0.f;
 	float Counter = 1.f;
 
-	FVector LastActorLocation;
-
 	FVector PivotLocation(float HAxis, float VAxis);
 
 	FVector AxisOfRotation(float HAxis, float VAxis);
-	
-	void TimerFunction();
 
 	void MoveCube();
-
-//Second Move Cube Try
-	FTimerHandle TimerHandle;
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	bool FirstMethod = false;
-
-
+	
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> ActorToSpawn;
 
 public:	
 	// Called every frame
