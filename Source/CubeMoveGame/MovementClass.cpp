@@ -225,15 +225,10 @@ void AMovementClass::MoveCube()
 	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
 	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, Angle/Step, AxisOfRotation(HorizontalAxis, VerticalAxis));
 	
-	//FRotator CubeRotation = UKismetMathLibrary::RotatorFromAxisAndAngle(AxisOfRotation(HorizontalAxis,VerticalAxis), Angle/Step);
-	//FRotator CombinedRotation = UKismetMathLibrary::ComposeRotators(GetActorRotation(), CubeRotation);
-	//SetActorRotation(CombinedRotation);
-
 	FRotator CubeRotaion_World = FRotator(VerticalAxis * -Angle/Step ,0, HorizontalAxis * -Angle/Step);
 	AddActorWorldRotation(CubeRotaion_World);
 
 	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
-	
 
 	if(Counter >= Step)
 	{

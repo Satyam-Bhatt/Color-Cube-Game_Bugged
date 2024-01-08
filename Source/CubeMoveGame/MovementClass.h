@@ -21,6 +21,9 @@ public:
 	UFUNCTION()
 	void TimelineProgress(float Value);
 
+	UPROPERTY(EditAnywhere)
+	bool ScriptAttachmentCheck = false;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
