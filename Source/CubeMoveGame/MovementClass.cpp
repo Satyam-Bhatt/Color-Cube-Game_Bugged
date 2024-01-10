@@ -18,6 +18,7 @@ AMovementClass::AMovementClass()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube Static Mesh"));
+	RootComponent = CubeMesh;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArm->SetupAttachment(CubeMesh);
@@ -196,8 +197,8 @@ void AMovementClass::Tick(float DeltaTime)
 	FHitResult OutHit;
 	FCollisionQueryParams TraceParams;
 
-	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECC_Visibility, TraceParams);
-	DrawDebugLine(GetWorld(), GetActorLocation(), EndLocation, FColor::Red, false, -1, 0, 2.f);
+	/*bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECC_Visibility, TraceParams);
+	//DrawDebugLine(GetWorld(), GetActorLocation(), EndLocation, FColor::Red, false, -1, 0, 2.f);
 	
 	if(bHit)
 	{
@@ -205,7 +206,7 @@ void AMovementClass::Tick(float DeltaTime)
 		UE_LOG(LogTemp, Warning, TEXT("Actor: %s"), *OutHit.GetActor()->GetActorNameOrLabel());
 
 		GetWorld()->SpawnActor<AActor>(ActorToSpawn, OutHit.ImpactPoint, FRotator::ZeroRotator);
-	}
+	}*/
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)

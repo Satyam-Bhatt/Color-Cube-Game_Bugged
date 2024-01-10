@@ -2,6 +2,7 @@
 
 #include "MovementClass.h"
 #include "RayTrace_Component.h"
+#include "ColorBlocks.h"
 
 // Sets default values for this component's properties
 URayTrace_Component::URayTrace_Component()
@@ -10,7 +11,8 @@ URayTrace_Component::URayTrace_Component()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	MaterialToAssign_1 = CreateDefaultSubobject<UMaterial>(TEXT("Material 1"));
+	MaterialToAssign_2 = CreateDefaultSubobject<UMaterial>(TEXT("Material 2"));
 }
 
 // Called when the game starts
@@ -26,6 +28,47 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	Class_Script->ScriptAttachmentCheck = true;
+	AActor* Owner = GetOwner();
+
+	FVector StartLocation = Owner->GetActorLocation();
+	FVector EndLocation = GetForwardVector() * 1000.f + Owner->GetActorLocation();
+
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+
+	if(bHit)
+	{
+		UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
+
+		if(CubeMesh_Other != nullptr)
+		{
+			CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
+		}
+	}
+
+	//Other method is to check when the line trace hits and then turn it on and off
+	//for loop experimental code
+		
+
+	int numIncreaser = 0;
+	for(AColorBlocks* ColorBlock : MyTestActor)
+	{
+		if(ColorBlock->Universal)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Chla"));
+		}
+		else{
+			UE_LOG(LogTemp, Warning, TEXT("Nahi"));
+		}
+	}
+
+	if(veryTrue)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Yesssssssss"));
+	}
+
 }
 

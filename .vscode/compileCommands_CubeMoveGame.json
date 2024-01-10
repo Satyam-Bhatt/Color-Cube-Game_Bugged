@@ -1,5 +1,37 @@
 [
 	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\Child_RayTraceSpawn.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\Child_RayTraceSpawn.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\ColorBlocks.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\ColorBlocks.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\CubeMoveGame.Build.cs",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
@@ -49,6 +81,22 @@
 	},
 	{
 		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\MovementClass.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\RayTrace_Component.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\Source\\CubeMoveGame\\RayTrace_Component.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\satya\\OneDrive\\Desktop\\Unreal Games\\Paint Cube Game\\.vscode\\compileCommands_CubeMoveGame\\CubeMoveGame.261.rsp"

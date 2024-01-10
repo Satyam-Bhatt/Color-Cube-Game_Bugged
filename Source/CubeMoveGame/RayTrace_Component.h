@@ -6,7 +6,6 @@
 #include "Components/SceneComponent.h"
 #include "RayTrace_Component.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CUBEMOVEGAME_API URayTrace_Component : public USceneComponent
 {
@@ -22,6 +21,17 @@ protected:
 
 private:
 	class AMovementClass* Class_Script;
+
+	UPROPERTY(EditAnywhere)
+	TArray<class AColorBlocks*> MyTestActor;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_1;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_2;
+
+	bool veryTrue = false;
 	
 
 public:	
