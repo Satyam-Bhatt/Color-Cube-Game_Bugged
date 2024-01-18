@@ -91,6 +91,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	class URayTrace_Component* RayTracing_Boy;
 
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_1;
+
+	void ColorOtherBlocks();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

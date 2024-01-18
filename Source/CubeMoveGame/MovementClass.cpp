@@ -28,6 +28,8 @@ AMovementClass::AMovementClass()
 	Camera->SetupAttachment(SpringArm);
 
 	RayTracing_Boy = CreateDefaultSubobject<URayTrace_Component>(TEXT("Ray Trace"));
+
+	MaterialToAssign_1 = CreateDefaultSubobject<UMaterial>(TEXT("Material 1"));
 }
 
 void AMovementClass::TimelineProgress(float Value)
@@ -224,11 +226,33 @@ void AMovementClass::MoveCube()
 		GetWorldTimerManager().ClearTimer(TimeHandleBar);
 		MoveLocation = GetActorLocation();
 		Counter = 1.f;
-
-		RayTracing_Boy->CheckOne();
+		
+		ColorOtherBlocks();
 	}
 	else{
 		Counter = Counter + 1;
 	}
 
+}
+
+void AMovementClass::ColorOtherBlocks()
+{
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = GetActorForwardVector() * 1000.f + GetActorLocation();
+
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+
+	if(bHit)
+	{
+		UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
+
+		if(CubeMesh_Other != nullptr)
+		{
+			CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
+		}
+	}
 }

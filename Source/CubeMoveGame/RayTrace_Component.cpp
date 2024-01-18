@@ -28,31 +28,6 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//if(SetMateria_Or_Not)
-	//{
-		AActor* Owner = GetOwner();
-
-		FVector StartLocation = Owner->GetActorLocation();
-		FVector EndLocation = Owner->GetActorForwardVector() * 1000.f + Owner->GetActorLocation();
-
-		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
-
-		FHitResult Hit;
-		FCollisionQueryParams CollisionParams;
-		bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-		if(bHit && SetMateria_Or_Not)
-		{
-			UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
-
-			if(CubeMesh_Other != nullptr)
-			{
-				CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
-				UE_LOG(LogTemp, Warning, TEXT("Mat Set: Complete"));
-			}
-		}	
-	//}	
-
 	//Other method is to check when the line trace hits and then turn it on and off
 	//for loop experimental code
 	//transfer to the scene component
@@ -63,10 +38,10 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	{
 		if(ColorBlock->Universal)
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("Chla"));
+			UE_LOG(LogTemp, Warning, TEXT("Chla"));
 		}
 		else{
-			//UE_LOG(LogTemp, Warning, TEXT("Nahi"));
+			UE_LOG(LogTemp, Warning, TEXT("Nahi"));
 		}
 	}
 
@@ -75,35 +50,5 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		UE_LOG(LogTemp, Warning, TEXT("Yesssssssss"));
 	}
 
-}
-
-void URayTrace_Component::SetMaterial_Mine()
-{
-	AActor* Owner = GetOwner();
-
-	FVector StartLocation = Owner->GetActorLocation();
-	FVector EndLocation = Owner->GetActorForwardVector() * 1000.f + Owner->GetActorLocation();
-
-	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
-
-	FHitResult Hit;
-	FCollisionQueryParams CollisionParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-	if(bHit)
-	{
-		UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
-
-		if(CubeMesh_Other != nullptr)
-		{
-			CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
-		}
-	}
-}
-
-void URayTrace_Component::CheckOne()
-{
-	SetMateria_Or_Not = true;
-	UE_LOG(LogTemp, Warning, TEXT("Wow"));
 }
 
