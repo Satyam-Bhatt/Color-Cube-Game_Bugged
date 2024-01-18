@@ -19,7 +19,7 @@ public:
 	UStaticMeshComponent* ColorMesh;
 
 	UPROPERTY(EditAnywhere)
-	bool Universal = false;
+	int Universal = 0;
 
 protected:
 	// Called when the game starts or when spawned

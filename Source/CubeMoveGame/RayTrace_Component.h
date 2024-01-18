@@ -25,24 +25,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	TArray<class AColorBlocks*> MyTestActor;
 
-	UPROPERTY(EditAnywhere)
-	class UMaterial* MaterialToAssign_1;
-
-	UPROPERTY(EditAnywhere)
-	class UMaterial* MaterialToAssign_2;
-
 	bool veryTrue = false;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void SetMaterial_Mine();
 
-	void CheckOne();
-
-	UPROPERTY(EditAnywhere, Category = "Kuch Ho")
-	bool SetMateria_Or_Not = false;
-
-		
 };

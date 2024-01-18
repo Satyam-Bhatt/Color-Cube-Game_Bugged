@@ -32,7 +32,10 @@ void AColorBlocks::Tick(float DeltaTime)
 
 	if(Material_Mine == MaterialCheck)
 	{
-		Universal = true;
+		Universal = 1;
+	}
+	else{
+		Universal = 0;
 	}
 
 }
