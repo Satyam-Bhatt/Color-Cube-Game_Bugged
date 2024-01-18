@@ -28,6 +28,56 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	//if(SetMateria_Or_Not)
+	//{
+		AActor* Owner = GetOwner();
+
+		FVector StartLocation = Owner->GetActorLocation();
+		FVector EndLocation = GetForwardVector() * 1000.f + Owner->GetActorLocation();
+
+		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
+
+		FHitResult Hit;
+		FCollisionQueryParams CollisionParams;
+		bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+
+		if(bHit)
+		{
+			UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
+
+			if(CubeMesh_Other != nullptr)
+			{
+				CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
+			}
+		}	
+	//}	
+
+	//Other method is to check when the line trace hits and then turn it on and off
+	//for loop experimental code
+	//transfer to the scene component
+		
+
+	int numIncreaser = 0;
+	for(AColorBlocks* ColorBlock : MyTestActor)
+	{
+		if(ColorBlock->Universal)
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("Chla"));
+		}
+		else{
+			//UE_LOG(LogTemp, Warning, TEXT("Nahi"));
+		}
+	}
+
+	if(veryTrue)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Yesssssssss"));
+	}
+
+}
+
+void URayTrace_Component::SetMaterial_Mine()
+{
 	AActor* Owner = GetOwner();
 
 	FVector StartLocation = Owner->GetActorLocation();
@@ -48,27 +98,10 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 			CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
 		}
 	}
+}
 
-	//Other method is to check when the line trace hits and then turn it on and off
-	//for loop experimental code
-		
-
-	int numIncreaser = 0;
-	for(AColorBlocks* ColorBlock : MyTestActor)
-	{
-		if(ColorBlock->Universal)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Chla"));
-		}
-		else{
-			UE_LOG(LogTemp, Warning, TEXT("Nahi"));
-		}
-	}
-
-	if(veryTrue)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Yesssssssss"));
-	}
-
+void URayTrace_Component::CheckOne()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Wow"));
 }
 

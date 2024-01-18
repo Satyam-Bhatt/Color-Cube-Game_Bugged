@@ -191,22 +191,7 @@ void AMovementClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	CurveTimeline.TickTimeline(DeltaTime);
-	
-	FVector StartLocation = GetActorLocation();
-	FVector EndLocation = GetActorLocation() + GetActorForwardVector() * 1000.f;
-	FHitResult OutHit;
-	FCollisionQueryParams TraceParams;
 
-	/*bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECC_Visibility, TraceParams);
-	//DrawDebugLine(GetWorld(), GetActorLocation(), EndLocation, FColor::Red, false, -1, 0, 2.f);
-	
-	if(bHit)
-	{
-		DrawDebugBox(GetWorld(), OutHit.ImpactPoint, FVector(10,10,10), FColor::Red, false, 2.f);
-		UE_LOG(LogTemp, Warning, TEXT("Actor: %s"), *OutHit.GetActor()->GetActorNameOrLabel());
-
-		GetWorld()->SpawnActor<AActor>(ActorToSpawn, OutHit.ImpactPoint, FRotator::ZeroRotator);
-	}*/
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
@@ -236,6 +221,7 @@ void AMovementClass::MoveCube()
 		GetWorldTimerManager().ClearTimer(TimeHandleBar);
 		MoveLocation = GetActorLocation();
 		Counter = 1.f;
+
 	}
 	else{
 		Counter = Counter + 1;

@@ -32,11 +32,17 @@ private:
 	class UMaterial* MaterialToAssign_2;
 
 	bool veryTrue = false;
-	
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void SetMaterial_Mine();
+
+	void CheckOne();
+
+	UPROPERTY(EditAnywhere, Category = "Kuch Ho")
+	bool SetMateria_Or_Not = true;
 
 		
 };

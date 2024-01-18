@@ -87,9 +87,6 @@ private:
 	FVector AxisOfRotation(float HAxis, float VAxis);
 
 	void MoveCube();
-	
-	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<AActor> ActorToSpawn;
 
 public:	
 	// Called every frame
