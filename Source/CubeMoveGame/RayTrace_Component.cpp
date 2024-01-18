@@ -28,8 +28,8 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if(SetMateria_Or_Not)
-	{
+	//if(SetMateria_Or_Not)
+	//{
 		AActor* Owner = GetOwner();
 
 		FVector StartLocation = Owner->GetActorLocation();
@@ -41,7 +41,7 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		FCollisionQueryParams CollisionParams;
 		bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
 
-		if(bHit)
+		if(bHit && SetMateria_Or_Not)
 		{
 			UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
 
@@ -51,7 +51,7 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 				UE_LOG(LogTemp, Warning, TEXT("Mat Set: Complete"));
 			}
 		}	
-	}	
+	//}	
 
 	//Other method is to check when the line trace hits and then turn it on and off
 	//for loop experimental code
