@@ -47,6 +47,8 @@ protected:
 
 
 private:
+#pragma region //Components
+
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CubeMesh;
 
@@ -56,9 +58,28 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
 
-	FVector MoveLocation;
+	UPROPERTY(EditAnywhere)
+	class URayTrace_Component* RayTracing_Boy;
 
-	void TimelineFunction();
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_Red;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_Green;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_Blue;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_Orange;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_Yellow;
+
+	UPROPERTY(EditAnywhere)
+	class UMaterial* MaterialToAssign_White;
+
+#pragma endregion
 
 #pragma region //KeyBindings
 
@@ -82,19 +103,13 @@ private:
 	float Step = 0.f;
 	float Counter = 1.f;
 
+	FVector MoveLocation;
 	FVector PivotLocation(float HAxis, float VAxis);
-
 	FVector AxisOfRotation(float HAxis, float VAxis);
 
 	void MoveCube();
-
-	UPROPERTY(EditAnywhere)
-	class URayTrace_Component* RayTracing_Boy;
-
-	UPROPERTY(EditAnywhere)
-	class UMaterial* MaterialToAssign_1;
-
-	void ColorOtherBlocks();
+	void ColorOtherBlocks(FVector Direction, FColor Line_Color, UMaterial* Material_Assign);
+	void TimelineFunction();
 
 public:	
 	// Called every frame

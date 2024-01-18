@@ -25,14 +25,9 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//Other method is to check when the line trace hits and then turn it on and off
-	//for loop experimental code
-	//transfer to the scene component
-	int numIncreaser = 0;
-	UE_LOG(LogTemp, Warning, TEXT("numIncreaser: %i"), numIncreaser);
-	UE_LOG(LogTemp, Warning, TEXT("Actors: %i"), MyTestActor.Num());
+	//int numIncreaser = 0;
 
-	for(AColorBlocks* ColorBlock : MyTestActor)
+	/*for(AColorBlocks* ColorBlock : MyTestActor)
 	{
 		numIncreaser = numIncreaser + ColorBlock->Universal;
 	}
@@ -40,6 +35,22 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	if(MyTestActor.Num() == numIncreaser)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Funny"));
+	}*/
+}
+
+bool URayTrace_Component::Counter_Mine()
+{
+	int numIncreaser = 0; 
+
+	for(AColorBlocks* ColorBlock : MyTestActor)
+	{
+		numIncreaser = numIncreaser + ColorBlock->NumberSetter();
 	}
+
+	if(MyTestActor.Num() == numIncreaser)
+	{
+		return true;
+	}
+	else return false;
 }
 

@@ -29,13 +29,28 @@ AMovementClass::AMovementClass()
 
 	RayTracing_Boy = CreateDefaultSubobject<URayTrace_Component>(TEXT("Ray Trace"));
 
-	MaterialToAssign_1 = CreateDefaultSubobject<UMaterial>(TEXT("Material 1"));
+	MaterialToAssign_Red = CreateDefaultSubobject<UMaterial>(TEXT("Material Red"));
+	MaterialToAssign_Green = CreateDefaultSubobject<UMaterial>(TEXT("Material Green"));
+	MaterialToAssign_Blue = CreateDefaultSubobject<UMaterial>(TEXT("Material Blue"));
+	MaterialToAssign_Orange = CreateDefaultSubobject<UMaterial>(TEXT("Material Orange"));
+	MaterialToAssign_Yellow = CreateDefaultSubobject<UMaterial>(TEXT("Material Yellow"));
+	MaterialToAssign_White = CreateDefaultSubobject<UMaterial>(TEXT("Material White"));
 }
 
 void AMovementClass::TimelineProgress(float Value)
 {
 	FVector NewLocation = FMath::Lerp(StartLoc, EndLoc, Value);
 	SetActorLocation(NewLocation);
+
+	if(Value >= 1)
+	{
+		ColorOtherBlocks(GetActorForwardVector(), FColor::Red, MaterialToAssign_Red);
+		ColorOtherBlocks(-GetActorForwardVector(), FColor::Orange, MaterialToAssign_Orange);
+		ColorOtherBlocks(GetActorUpVector(), FColor::White, MaterialToAssign_White);
+		ColorOtherBlocks(-GetActorUpVector(), FColor::Yellow, MaterialToAssign_Yellow);
+		ColorOtherBlocks(GetActorRightVector(), FColor::Green, MaterialToAssign_Green);
+		ColorOtherBlocks(-GetActorRightVector(), FColor::Blue, MaterialToAssign_Blue);
+	}
 }
 
 // Called to bind functionality to input
@@ -63,6 +78,7 @@ void AMovementClass::BeginPlay()
 	Super::BeginPlay();
 
 	LastActorLocation = GetActorLocation();
+	MoveLocation = GetActorLocation();
 	Step = 30.f;
 }
 
@@ -188,7 +204,7 @@ void AMovementClass::TimelineFunction()
 	TimelineProgress.BindUFunction(this, FName("TimelineProgress"));
 	CurveTimeline.AddInterpFloat(CurveFloat, TimelineProgress);	
 
-	CurveTimeline.PlayFromStart();
+    CurveTimeline.PlayFromStart();
 }
 
 void AMovementClass::Tick(float DeltaTime)
@@ -227,20 +243,24 @@ void AMovementClass::MoveCube()
 		MoveLocation = GetActorLocation();
 		Counter = 1.f;
 		
-		ColorOtherBlocks();
+		ColorOtherBlocks(GetActorForwardVector(), FColor::Red, MaterialToAssign_Red);
+		ColorOtherBlocks(-GetActorForwardVector(), FColor::Orange, MaterialToAssign_Orange);
+		ColorOtherBlocks(GetActorUpVector(), FColor::White, MaterialToAssign_White);
+		ColorOtherBlocks(-GetActorUpVector(), FColor::Yellow, MaterialToAssign_Yellow);
+		ColorOtherBlocks(GetActorRightVector(), FColor::Green, MaterialToAssign_Green);
+		ColorOtherBlocks(-GetActorRightVector(), FColor::Blue, MaterialToAssign_Blue);
 	}
 	else{
 		Counter = Counter + 1;
 	}
-
 }
 
-void AMovementClass::ColorOtherBlocks()
+void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color, UMaterial* Material_Assign)
 {
 	FVector StartLocation = GetActorLocation();
-	FVector EndLocation = GetActorForwardVector() * 1000.f + GetActorLocation();
+	FVector EndLocation = Direction_Line * 1000.f + GetActorLocation();
 
-	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, Line_Color, false, -1.f, 0, 1.f);
 
 	FHitResult Hit;
 	FCollisionQueryParams CollisionParams;
@@ -252,7 +272,15 @@ void AMovementClass::ColorOtherBlocks()
 
 		if(CubeMesh_Other != nullptr)
 		{
-			CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
+			CubeMesh_Other->SetMaterial(0, Material_Assign);
+
+			if(RayTracing_Boy->Counter_Mine())
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Next Level"));
+			}
+			else{
+				UE_LOG(LogTemp, Error, TEXT("Unsuccessful"));
+			}
 		}
 	}
 }

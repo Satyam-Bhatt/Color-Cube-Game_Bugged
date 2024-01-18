@@ -28,6 +28,11 @@ void AColorBlocks::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+}
+
+int AColorBlocks::NumberSetter()
+{
 	UMaterialInterface* Material_Mine = ColorMesh->GetMaterial(0);
 
 	if(Material_Mine == MaterialCheck)
@@ -37,6 +42,6 @@ void AColorBlocks::Tick(float DeltaTime)
 	else{
 		Universal = 0;
 	}
-
+	return Universal;
 }
 
