@@ -28,12 +28,12 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//if(SetMateria_Or_Not)
-	//{
+	if(SetMateria_Or_Not)
+	{
 		AActor* Owner = GetOwner();
 
 		FVector StartLocation = Owner->GetActorLocation();
-		FVector EndLocation = GetForwardVector() * 1000.f + Owner->GetActorLocation();
+		FVector EndLocation = Owner->GetActorForwardVector() * 1000.f + Owner->GetActorLocation();
 
 		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
 
@@ -48,9 +48,10 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 			if(CubeMesh_Other != nullptr)
 			{
 				CubeMesh_Other->SetMaterial(0, MaterialToAssign_1);
+				UE_LOG(LogTemp, Warning, TEXT("Mat Set: Complete"));
 			}
 		}	
-	//}	
+	}	
 
 	//Other method is to check when the line trace hits and then turn it on and off
 	//for loop experimental code
@@ -81,7 +82,7 @@ void URayTrace_Component::SetMaterial_Mine()
 	AActor* Owner = GetOwner();
 
 	FVector StartLocation = Owner->GetActorLocation();
-	FVector EndLocation = GetForwardVector() * 1000.f + Owner->GetActorLocation();
+	FVector EndLocation = Owner->GetActorForwardVector() * 1000.f + Owner->GetActorLocation();
 
 	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 1.f);
 
@@ -102,6 +103,7 @@ void URayTrace_Component::SetMaterial_Mine()
 
 void URayTrace_Component::CheckOne()
 {
+	SetMateria_Or_Not = true;
 	UE_LOG(LogTemp, Warning, TEXT("Wow"));
 }
 

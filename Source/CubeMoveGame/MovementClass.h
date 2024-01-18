@@ -88,6 +88,9 @@ private:
 
 	void MoveCube();
 
+	UPROPERTY(EditAnywhere)
+	class URayTrace_Component* RayTracing_Boy;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

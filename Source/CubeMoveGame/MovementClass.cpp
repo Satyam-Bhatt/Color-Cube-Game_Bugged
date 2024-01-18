@@ -10,6 +10,7 @@
 #include "Math/Vector.h"
 #include "GameFramework/RotatingMovementComponent.h"
 #include "Components/SceneComponent.h"
+#include "RayTrace_Component.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -25,6 +26,8 @@ AMovementClass::AMovementClass()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	RayTracing_Boy = CreateDefaultSubobject<URayTrace_Component>(TEXT("Ray Trace"));
 }
 
 void AMovementClass::TimelineProgress(float Value)
@@ -222,6 +225,7 @@ void AMovementClass::MoveCube()
 		MoveLocation = GetActorLocation();
 		Counter = 1.f;
 
+		RayTracing_Boy->CheckOne();
 	}
 	else{
 		Counter = Counter + 1;

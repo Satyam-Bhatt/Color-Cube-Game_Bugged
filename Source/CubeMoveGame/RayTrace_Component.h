@@ -42,7 +42,7 @@ public:
 	void CheckOne();
 
 	UPROPERTY(EditAnywhere, Category = "Kuch Ho")
-	bool SetMateria_Or_Not = true;
+	bool SetMateria_Or_Not = false;
 
 		
 };
