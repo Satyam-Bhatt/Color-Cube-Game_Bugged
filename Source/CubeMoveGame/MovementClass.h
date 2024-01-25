@@ -111,8 +111,6 @@ private:
 	void MoveCube();
 	void ColorOtherBlocks(FVector Direction, FColor Line_Color, UMaterial* Material_Assign);
 	void TimelineFunction();
-
-	FTimerHandle DragTimer;
 	void DragTimerFunction();
 
 public:	
