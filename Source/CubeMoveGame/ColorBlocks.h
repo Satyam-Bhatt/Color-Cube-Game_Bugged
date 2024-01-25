@@ -18,7 +18,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* ColorMesh;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	int Universal = 0;
 
 protected:
@@ -30,10 +30,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "My Personal Mesh")
 	class UMaterial* MaterialCheck;
 
+	UPROPERTY(EditAnywhere)
+	class AMovementClass* MovementClass;
+
+	void LineTraceToMove(FVector Direction_Line, FColor Line_Color);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	int NumberSetter();
+
 
 };

@@ -106,14 +106,23 @@ private:
 	FVector MoveLocation;
 	FVector PivotLocation(float HAxis, float VAxis);
 	FVector AxisOfRotation(float HAxis, float VAxis);
+	class AColorBlocks* ColorBlocks;
 
 	void MoveCube();
 	void ColorOtherBlocks(FVector Direction, FColor Line_Color, UMaterial* Material_Assign);
 	void TimelineFunction();
 
+	FTimerHandle DragTimer;
+	void DragTimerFunction();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	bool FrontMove = false;
+	bool BackMove = false;
+	bool RightMove = false;
+	bool LeftMove = false;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

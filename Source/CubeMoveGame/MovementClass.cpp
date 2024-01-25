@@ -11,6 +11,7 @@
 #include "GameFramework/RotatingMovementComponent.h"
 #include "Components/SceneComponent.h"
 #include "RayTrace_Component.h"
+#include "ColorBlocks.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -96,6 +97,8 @@ void AMovementClass::UpMovement()
 			TimelineFunction();
 		}
 	}
+	UE_LOG(LogTemp, Error, TEXT("Call Start"));
+	GetWorldTimerManager().SetTimer(DragTimer, this, &AMovementClass::DragTimerFunction, 0.01f, false, 1.f);
 }
 
 void AMovementClass::RightMovement()
@@ -112,6 +115,8 @@ void AMovementClass::RightMovement()
 			MoveLocation = GetActorLocation() + FVector(0, YOffset, 0);
 		}
 	}
+	UE_LOG(LogTemp, Error, TEXT("Call Start"));
+	GetWorldTimerManager().SetTimer(DragTimer, this, &AMovementClass::DragTimerFunction, 0.01f, false, 1.f);
 }
 
 void AMovementClass::LeftMovement()
@@ -128,6 +133,8 @@ void AMovementClass::LeftMovement()
 			MoveLocation = GetActorLocation() - FVector(0, YOffset, 0);
 		}
 	}
+	UE_LOG(LogTemp, Error, TEXT("Call Start"));
+	GetWorldTimerManager().SetTimer(DragTimer, this, &AMovementClass::DragTimerFunction, 0.01f, false, 1.f);
 }
 
 void AMovementClass::DownMovement()
@@ -143,7 +150,9 @@ void AMovementClass::DownMovement()
 
 			MoveLocation = GetActorLocation() - FVector(XOffset,0,0); 			
 		}
-	}	
+	}
+	UE_LOG(LogTemp, Error, TEXT("Call Start"));	
+	GetWorldTimerManager().SetTimer(DragTimer, this, &AMovementClass::DragTimerFunction, 0.01f, false, 1.f);
 }
 
 void AMovementClass::RotateUp()
@@ -213,6 +222,10 @@ void AMovementClass::Tick(float DeltaTime)
 
 	CurveTimeline.TickTimeline(DeltaTime);
 
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = -FVector::UpVector * 200.f + GetActorLocation();
+
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 4.f);
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
@@ -255,10 +268,37 @@ void AMovementClass::MoveCube()
 	}
 }
 
+void AMovementClass::DragTimerFunction()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Called:"));
+
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = -FVector::UpVector * 200.f + GetActorLocation();
+
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 4.f);
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+
+	if(bHit)
+	{
+		ColorBlocks = Cast<AColorBlocks>(Hit.GetActor());
+	}
+
+	else if(!bHit && ColorBlocks != nullptr)
+	{
+		FVector NewLocation = FVector(GetActorLocation().X, GetActorLocation().Y, ColorBlocks->GetActorLocation().Z);
+		ColorBlocks->SetActorLocation(NewLocation);
+	}
+
+	GetWorldTimerManager().ClearTimer(DragTimer);
+}
+
 void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color, UMaterial* Material_Assign)
 {
 	FVector StartLocation = GetActorLocation();
-	FVector EndLocation = Direction_Line * 1000.f + GetActorLocation();
+	FVector EndLocation = Direction_Line * 200.f + GetActorLocation();
 
 	DrawDebugLine(GetWorld(), StartLocation, EndLocation, Line_Color, false, -1.f, 0, 1.f);
 
@@ -268,7 +308,7 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 
 	if(bHit)
 	{
-		UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());
+		UStaticMeshComponent* CubeMesh_Other = Cast<UStaticMeshComponent>(Hit.GetComponent());;
 
 		if(CubeMesh_Other != nullptr)
 		{
@@ -279,7 +319,7 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 				UE_LOG(LogTemp, Warning, TEXT("Next Level"));
 			}
 			else{
-				UE_LOG(LogTemp, Error, TEXT("Unsuccessful"));
+				//UE_LOG(LogTemp, Error, TEXT("Unsuccessful"));
 			}
 		}
 	}
