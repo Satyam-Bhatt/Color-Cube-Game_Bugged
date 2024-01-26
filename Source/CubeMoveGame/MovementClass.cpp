@@ -244,6 +244,8 @@ void AMovementClass::MoveCube()
 		MoveLocation = GetActorLocation();
 		Counter = 1.f;
 		
+		ColorBlocks = nullptr; //Didn't give much thought. If problem with rolling and dragging arises think about this code
+
 		ColorOtherBlocks(GetActorForwardVector(), FColor::Red, MaterialToAssign_Red);
 		ColorOtherBlocks(-GetActorForwardVector(), FColor::Orange, MaterialToAssign_Orange);
 		ColorOtherBlocks(GetActorUpVector(), FColor::White, MaterialToAssign_White);
@@ -299,6 +301,7 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 		{
 			CubeMesh_Other->SetMaterial(0, Material_Assign);
 
+			//Call Box Trigger Funtion and then then verify the solution
 			if(RayTracing_Boy->Counter_Mine())
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Next Level"));

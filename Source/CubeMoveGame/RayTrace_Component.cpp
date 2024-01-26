@@ -24,18 +24,6 @@ void URayTrace_Component::BeginPlay()
 void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	//int numIncreaser = 0;
-
-	/*for(AColorBlocks* ColorBlock : MyTestActor)
-	{
-		numIncreaser = numIncreaser + ColorBlock->Universal;
-	}
-
-	if(MyTestActor.Num() == numIncreaser)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Funny"));
-	}*/
 }
 
 bool URayTrace_Component::Counter_Mine()

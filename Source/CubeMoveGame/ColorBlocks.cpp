@@ -28,28 +28,6 @@ void AColorBlocks::BeginPlay()
 void AColorBlocks::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	LineTraceToMove(GetActorForwardVector(), FColor::Red);
-	LineTraceToMove(-GetActorForwardVector(), FColor::Orange);
-	LineTraceToMove(GetActorRightVector(), FColor::Green);
-	LineTraceToMove(-GetActorRightVector(), FColor::Blue);
-}
-
-void AColorBlocks::LineTraceToMove(FVector Direction_Line, FColor Line_Color)
-{
-	FVector StartLocation = GetActorLocation();
-	FVector EndLocation = Direction_Line * 55.f + GetActorLocation();
-
-	DrawDebugLine(GetWorld(), StartLocation, EndLocation, Line_Color, false, -1.f, 0, 1.f);
-
-	FHitResult Hit;
-	FCollisionQueryParams CollisionParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-	if(bHit)
-	{
-
-	}
 }
 
 int AColorBlocks::NumberSetter()

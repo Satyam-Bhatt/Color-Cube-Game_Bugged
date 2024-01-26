@@ -33,8 +33,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	class AMovementClass* MovementClass;
 
-	void LineTraceToMove(FVector Direction_Line, FColor Line_Color);
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
