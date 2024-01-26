@@ -214,11 +214,6 @@ void AMovementClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	CurveTimeline.TickTimeline(DeltaTime);
-
-	FVector StartLocation = GetActorLocation();
-	FVector EndLocation = -FVector::RightVector * 100.f + GetActorLocation();
-
-	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 4.f);
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
