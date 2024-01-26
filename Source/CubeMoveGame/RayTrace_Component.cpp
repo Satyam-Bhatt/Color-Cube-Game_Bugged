@@ -18,6 +18,17 @@ void URayTrace_Component::BeginPlay()
 {
 	Super::BeginPlay();
 	Class_Script = Cast<AMovementClass>(GetOwner());
+
+	BoxTriggers.Empty();
+
+	for(AActor* Actor : StaticMeshes)
+	{
+		UBox_Trigger* BoxTriggerComponent = Actor->FindComponentByClass<UBox_Trigger>();
+		if(BoxTriggerComponent != nullptr)
+		{
+			BoxTriggers.Add(BoxTriggerComponent);
+		}
+	}
 }
 
 
@@ -38,8 +49,7 @@ bool URayTrace_Component::Counter_Mine()
 	}
 	for(UBox_Trigger* BoxTrigger : BoxTriggers)
 	{
-		box_numMultiplier = box_numMultiplier * BoxTrigger->Overlapped_Count();
-		UE_LOG(LogTemp, Warning, TEXT("Ovelapped Count to script: %d"), BoxTrigger->Overlapped_Count());
+		box_numMultiplier = box_numMultiplier * BoxTrigger->Overlapped_OR_Not;
 	}
 
 	if(MyTestActor.Num() == numIncreaser && box_numMultiplier == 1)

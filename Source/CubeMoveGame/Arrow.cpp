@@ -29,7 +29,7 @@ void AArrow::Tick(float DeltaTime)
 	if(MovementClass != nullptr)
 	{
 		FVector LocationOfCube = MovementClass->GetActorLocation();
-		SetActorLocation(FVector(150,0,0) + LocationOfCube);
+		SetActorLocation(FVector(xValue,yValue,0) + LocationOfCube);
 	}
 	else{
 		UE_LOG(LogTemp, Warning, TEXT("Save Crash"));

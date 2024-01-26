@@ -20,24 +20,18 @@ void UBox_Trigger::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
     TArray<AActor*> OverlappingActors;
     GetOverlappingActors(OverlappingActors);
 
-    for (AActor* Actors : OverlappingActors)
+    if(OverlappingActors.Num() > 0)
     {
-        
-        if(Actors->ActorHasTag("Needed"))
+        for(AActor* Actor : OverlappingActors)
         {
-            UE_LOG(LogTemp, Error, TEXT("Overlapped"));
-            Overlapped_OR_Not = 1;
-        }
-        else
-        {
-            Overlapped_OR_Not = 0;
+            if(Actor->ActorHasTag("Needed"))
+            {
+                Overlapped_OR_Not = 1;
+            }
         }
     }
-
-}
-
-int UBox_Trigger::Overlapped_Count()
-{
-    return Overlapped_OR_Not;
+    else{
+        Overlapped_OR_Not = 0;
+    }
 }
 

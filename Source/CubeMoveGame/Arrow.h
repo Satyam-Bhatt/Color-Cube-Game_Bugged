@@ -30,4 +30,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	class AMovementClass* MovementClass;
 
+	UPROPERTY(EditAnywhere)
+	float xValue = 0.f;
+
+	UPROPERTY(EditAnywhere)
+	float yValue = 0.f;
+
 };
