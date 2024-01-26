@@ -21,10 +21,13 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+private:
+	UPROPERTY(VisibleAnywhere, Category = "Tirgger Variable")
+	int32 Overlapped_OR_Not = 0;
+
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(EditAnywhere, Category = "Tirgger Variable")
-	bool Overlapped_OR_Not = false;
+	int Overlapped_Count();
 
 };

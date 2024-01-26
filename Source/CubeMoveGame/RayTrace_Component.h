@@ -25,6 +25,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	TArray<class AColorBlocks*> MyTestActor;
 
+	UPROPERTY(EditAnywhere)
+	TArray<class UBox_Trigger*> BoxTriggers;
+
 	bool veryTrue = false;
 
 public:	

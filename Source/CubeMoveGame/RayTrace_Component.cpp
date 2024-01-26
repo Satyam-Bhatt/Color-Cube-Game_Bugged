@@ -3,6 +3,7 @@
 #include "MovementClass.h"
 #include "RayTrace_Component.h"
 #include "ColorBlocks.h"
+#include "Box_Trigger.h"
 
 // Sets default values for this component's properties
 URayTrace_Component::URayTrace_Component()
@@ -29,13 +30,19 @@ void URayTrace_Component::TickComponent(float DeltaTime, ELevelTick TickType, FA
 bool URayTrace_Component::Counter_Mine()
 {
 	int numIncreaser = 0; 
+	int box_numMultiplier = 1;
 
 	for(AColorBlocks* ColorBlock : MyTestActor)
 	{
 		numIncreaser = numIncreaser + ColorBlock->NumberSetter();
 	}
+	for(UBox_Trigger* BoxTrigger : BoxTriggers)
+	{
+		box_numMultiplier = box_numMultiplier * BoxTrigger->Overlapped_Count();
+		UE_LOG(LogTemp, Warning, TEXT("Ovelapped Count to script: %d"), BoxTrigger->Overlapped_Count());
+	}
 
-	if(MyTestActor.Num() == numIncreaser)
+	if(MyTestActor.Num() == numIncreaser && box_numMultiplier == 1)
 	{
 		return true;
 	}
