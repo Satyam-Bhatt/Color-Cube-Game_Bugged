@@ -86,7 +86,7 @@ void AMovementClass::BeginPlay()
 
 void AMovementClass::UpMovement()
 {
-	if(CurveFloat)
+	if(CurveFloat && !WallChecker(FVector::ForwardVector))
 	{
 		if(GetActorLocation() == MoveLocation)
 		{
@@ -102,7 +102,7 @@ void AMovementClass::UpMovement()
 
 void AMovementClass::RightMovement()
 {
-	if(CurveFloat)
+	if(CurveFloat && !WallChecker(FVector::RightVector))
 	{
 		if(GetActorLocation() == MoveLocation)
 		{
@@ -118,7 +118,7 @@ void AMovementClass::RightMovement()
 
 void AMovementClass::LeftMovement()
 {
-	if(CurveFloat)
+	if(CurveFloat && !WallChecker(-FVector::RightVector))
 	{
 		if(GetActorLocation() == MoveLocation)
 		{
@@ -134,7 +134,7 @@ void AMovementClass::LeftMovement()
 
 void AMovementClass::DownMovement()
 {
-	if(CurveFloat)
+	if(CurveFloat && !WallChecker(-FVector::ForwardVector))
 	{
 		if(GetActorLocation() == MoveLocation)
 		{
@@ -214,6 +214,11 @@ void AMovementClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	CurveTimeline.TickTimeline(DeltaTime);
+
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = -FVector::RightVector * 100.f + GetActorLocation();
+
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, -1.f, 0, 4.f);
 }
 
 FVector AMovementClass::PivotLocation(float HAxis, float VAxis)
@@ -279,6 +284,17 @@ void AMovementClass::DragTimerFunction()
 		FVector NewLocation = FVector(GetActorLocation().X, GetActorLocation().Y, ColorBlocks->GetActorLocation().Z);
 		ColorBlocks->SetActorLocation(NewLocation);
 	}
+}
+
+bool AMovementClass::WallChecker(FVector Direction)
+{
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = Direction * 100.f + GetActorLocation();
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_GameTraceChannel1, CollisionParams);
+	return bHit;
 }
 
 void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color, UMaterial* Material_Assign)

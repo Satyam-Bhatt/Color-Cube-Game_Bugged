@@ -112,6 +112,8 @@ private:
 	void ColorOtherBlocks(FVector Direction, FColor Line_Color, UMaterial* Material_Assign);
 	void TimelineFunction();
 	void DragTimerFunction();
+	bool MovementConsentFunction();
+	bool WallChecker(FVector Direction);
 
 public:	
 	// Called every frame
