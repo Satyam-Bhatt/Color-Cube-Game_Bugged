@@ -12,6 +12,7 @@
 #include "Components/SceneComponent.h"
 #include "RayTrace_Component.h"
 #include "ColorBlocks.h"
+#include "MyGameMode.h"
 
 // Sets default values
 AMovementClass::AMovementClass()
@@ -82,6 +83,8 @@ void AMovementClass::BeginPlay()
 	LastActorLocation = GetActorLocation();
 	MoveLocation = GetActorLocation();
 	Step = 30.f;
+
+	GameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
 }
 
 void AMovementClass::UpMovement()
@@ -313,12 +316,13 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 			CubeMesh_Other->SetMaterial(0, Material_Assign);
 
 			//Call Box Trigger Funtion and then then verify the solution
-			if(RayTracing_Boy->Counter_Mine())
+			if(RayTracing_Boy->Counter_Mine() && GameMode != nullptr)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Next Level"));
+				GameMode->WinCondition();
 			}
-			else{
-				//UE_LOG(LogTemp, Error, TEXT("Unsuccessful"));
+			else if(!RayTracing_Boy->Counter_Mine() && GameMode != nullptr)
+			{
+				//check if failed
 			}
 		}
 	}

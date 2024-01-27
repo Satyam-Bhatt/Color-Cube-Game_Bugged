@@ -106,7 +106,9 @@ private:
 	FVector MoveLocation;
 	FVector PivotLocation(float HAxis, float VAxis);
 	FVector AxisOfRotation(float HAxis, float VAxis);
+
 	class AColorBlocks* ColorBlocks;
+	class AMyGameMode* GameMode;
 
 	void MoveCube();
 	void ColorOtherBlocks(FVector Direction, FColor Line_Color, UMaterial* Material_Assign);
