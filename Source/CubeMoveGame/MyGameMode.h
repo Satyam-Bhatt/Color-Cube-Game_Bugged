@@ -30,6 +30,8 @@ private:
 	void StartGame(bool bState);
 
 public:
+
+	UFUNCTION(BlueprintImplementableEvent)
 	void WinCondition();
 
 };

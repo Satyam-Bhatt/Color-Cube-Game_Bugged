@@ -26,11 +26,6 @@ void AMyGameMode::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
 }
 
-void AMyGameMode::WinCondition()
-{
-    UE_LOG(LogTemp, Error, TEXT("Called From Outside"));
-}
-
 void AMyGameMode::StartGame(bool bState)
 {
     PlayerController_My->SetInputState(bState);
