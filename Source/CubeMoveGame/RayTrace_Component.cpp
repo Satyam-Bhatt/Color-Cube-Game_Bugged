@@ -47,9 +47,13 @@ bool URayTrace_Component::Counter_Mine()
 	{
 		numIncreaser = numIncreaser + ColorBlock->NumberSetter();
 	}
-	for(UBox_Trigger* BoxTrigger : BoxTriggers)
+
+	if(BoxTriggers.Num() != 0)
 	{
-		box_numMultiplier = box_numMultiplier * BoxTrigger->Overlapped_OR_Not;
+		for(UBox_Trigger* BoxTrigger : BoxTriggers)
+		{
+			box_numMultiplier = box_numMultiplier * BoxTrigger->Overlapped_OR_Not;
+		}
 	}
 
 	if(MyTestActor.Num() == numIncreaser && box_numMultiplier == 1)
