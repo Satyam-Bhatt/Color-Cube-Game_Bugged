@@ -154,7 +154,7 @@ void AMovementClass::DownMovement()
 void AMovementClass::RotateUp()
 {
 	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)) return;
-	else
+	else if(!WallChecker(FVector::ForwardVector))
 	{
 		HorizontalAxis = 0.f;
 		VerticalAxis = 1.f;
@@ -167,7 +167,7 @@ void AMovementClass::RotateUp()
 void AMovementClass::RotateRight()
 {
 	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)) return;
-	else
+	else if(!WallChecker(FVector::RightVector))
 	{ 
 		HorizontalAxis = 1.f;
 		VerticalAxis = 0.f;
@@ -180,7 +180,7 @@ void AMovementClass::RotateRight()
 void AMovementClass::RotateLeft()
 {
 	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar))	return;
-	else
+	else if(!WallChecker(-FVector::RightVector))
 	{
 		HorizontalAxis = -1.f; 
 		VerticalAxis = 0;
@@ -193,7 +193,7 @@ void AMovementClass::RotateLeft()
 void AMovementClass::RotateDown()
 {
 	if(GetWorldTimerManager().IsTimerActive(TimeHandleBar)) return;
-	else
+	else if(!WallChecker(-FVector::ForwardVector))
 	{
 		HorizontalAxis = 0.f;
 		VerticalAxis = -1.f;
@@ -236,7 +236,7 @@ void AMovementClass::MoveCube()
 	FVector InVector = GetActorLocation() - PivotLocation(HorizontalAxis, VerticalAxis);
 	FVector RotatedVector = UKismetMathLibrary::RotateAngleAxis(InVector, Angle/Step, AxisOfRotation(HorizontalAxis, VerticalAxis));
 	
-	FRotator CubeRotaion_World = FRotator(VerticalAxis * -Angle/Step ,0, HorizontalAxis * -Angle/Step);
+	FRotator CubeRotaion_World = FRotator(RotateHow * VerticalAxis * -Angle/Step ,0, HorizontalAxis * -Angle/Step * RotateHow);
 	AddActorWorldRotation(CubeRotaion_World);
 
 	SetActorLocation(PivotLocation(HorizontalAxis, VerticalAxis) + RotatedVector);
@@ -315,7 +315,6 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 		{
 			CubeMesh_Other->SetMaterial(0, Material_Assign);
 
-			//Call Box Trigger Funtion and then then verify the solution
 			if(RayTracing_Boy->Counter_Mine() && GameMode != nullptr)
 			{
 				GameMode->WinCondition();

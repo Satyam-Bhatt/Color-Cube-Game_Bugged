@@ -103,6 +103,9 @@ private:
 	float Step = 0.f;
 	float Counter = 1.f;
 
+	UPROPERTY(EditAnywhere)
+	float RotateHow = 1.f;
+
 	FVector MoveLocation;
 	FVector PivotLocation(float HAxis, float VAxis);
 	FVector AxisOfRotation(float HAxis, float VAxis);
