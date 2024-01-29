@@ -34,7 +34,7 @@ int AColorBlocks::NumberSetter()
 {
 	UMaterialInterface* Material_Mine = ColorMesh->GetMaterial(0);
 
-	if(Material_Mine == MaterialCheck)
+	if(Material_Mine == MaterialCheck || MaterialMatch == false)
 	{
 		Universal = 1;
 	}

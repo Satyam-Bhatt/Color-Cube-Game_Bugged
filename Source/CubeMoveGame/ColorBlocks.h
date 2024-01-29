@@ -39,5 +39,8 @@ public:
 
 	int NumberSetter();
 
+	UPROPERTY(EditAnywhere)
+	bool MaterialMatch = true;
+
 
 };

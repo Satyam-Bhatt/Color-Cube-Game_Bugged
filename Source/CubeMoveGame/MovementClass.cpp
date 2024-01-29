@@ -313,7 +313,10 @@ void AMovementClass::ColorOtherBlocks(FVector Direction_Line, FColor Line_Color,
 
 		if(CubeMesh_Other != nullptr)
 		{
-			CubeMesh_Other->SetMaterial(0, Material_Assign);
+			if(ColorBlocks->MaterialMatch == true)
+			{
+				CubeMesh_Other->SetMaterial(0, Material_Assign);
+			}
 
 			if(RayTracing_Boy->Counter_Mine() && GameMode != nullptr)
 			{
