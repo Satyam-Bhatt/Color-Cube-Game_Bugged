@@ -28,4 +28,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Tirgger Variable")
 	int32 Overlapped_OR_Not = 0;
 
+private:
+
+	UPROPERTY(EditAnywhere)
+	bool Detect_ColorChanger = false;
+
 };

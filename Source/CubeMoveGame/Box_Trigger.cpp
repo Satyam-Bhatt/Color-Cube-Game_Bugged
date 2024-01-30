@@ -24,7 +24,11 @@ void UBox_Trigger::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
     {
         for(AActor* Actor : OverlappingActors)
         {
-            if(Actor->ActorHasTag("Needed"))
+            if(Actor->ActorHasTag("Needed") && Detect_ColorChanger == false)
+            {
+                Overlapped_OR_Not = 1;
+            }
+            else if(Actor->ActorHasTag("Needed Uncolored") && Detect_ColorChanger == true)
             {
                 Overlapped_OR_Not = 1;
             }
